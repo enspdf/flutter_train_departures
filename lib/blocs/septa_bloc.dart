@@ -17,7 +17,10 @@ class SeptaBloc {
     });
   }
 
-  Stream<List<Train>> get trains => _trains.stream;
+  Stream<List<Train>> get trains => _trains.stream.map((trainList) => trainList
+      .where((train) => _directions.value.contains(train.direction))
+      .take(_count.value)
+      .toList());
   Stream<String> get station => _station.stream;
   Stream<int> get count => _count.stream;
   Stream<List<String>> get directions => _directions.stream;
